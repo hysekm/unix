@@ -1,0 +1,11 @@
+1) je to způsobeno tím, že by v tomto případě došlo k shiftnutí o více, než je
+počet argumentů
+2)$# počet argumentů při volání
+${#premenna} počet znaků dané proměnné
+${premenna:-vyraz} do proměnné přiřadí výraz, pokud není inicializovaná
+${premenna:cislo} zkrátí proměnnou o daný počet znaků
+${premenna:cislo1:cislo2} zkrátí proměnnou o daný počet od začátku a od konce
+${premenna/vyraz/text} první výskyt dané proměnné ve výrazu nahradí textem
+${premenna//vyraz/text} všechny výskyty dané proměnné nahradí textem
+Ne, @ nelze použít kdekoliv
+

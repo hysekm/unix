@@ -1,0 +1,57 @@
+#!/bin/sh
+if [[ -z "$4" ]]
+then
+if [[ -z "$3" ]]
+then
+cat > /tmp/tf
+else
+if [ "$1" == "-f" -o "$1" == "--fraction" ]
+then
+cat > /tmp/tf
+else
+cat "$3" > /tmp/tf
+fi
+fi
+else 
+cat "$4" > /tmp/tf
+fi
+if [ "$1" == "-l" -o "$1" == "--lines" ]
+then
+cat /tmp/tf |head -$(echo "$2" | cut -d - -f 2) | tail +$(echo "$2" | cut -d - -f 1)
+elif [ "$1" == "-f" -o "$1" == "--fraction" ]
+then
+p=`echo "$3" | cut -d / -f 1`
+r=`echo "$3" | cut -d / -f 2`
+s=`cat /tmp/tf | wc -l`
+let "p*=s"
+t=`expr $p % $r`
+if [ $t == 0 ]
+then
+p=$(( $p / $r ))
+else
+p=$(( $p / $r ))
+let "p++"
+fi
+r=`echo "$2" | cut -d / -f 1`
+u=`echo "$2" | cut -d / -f 2`
+let "r=(r*s)/u"
+cat /tmp/tf | head -$p | tail +$r
+elif [ "$1" == "-p" -o "$1" == "--part" ]
+then
+s=`cat /tmp/tf | wc -l`
+p=`echo "$2" |cut -d / -f 1`
+r=`echo "$2" |cut -d / -f 2`
+q=$(( $s % $r ))
+v=$r
+r=$(( $s / $r ))
+if [ $q -gt 0 -a $p == $v ]
+then
+v=$r
+r=$(( $r + $q ))
+else
+v=$r
+fi
+let "p=(p-1)*v+1"
+cat /tmp/tf | tail +$p | head -$r
+fi
+rm -f /tmp/tf

@@ -22,5 +22,5 @@ let "i++"
 done
 else
 tac /tmp/mf
-rm -f
+rm -f /tmp/mf
 fi

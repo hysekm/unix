@@ -1,10 +1,10 @@
 #!/bin/sh
-if [ $1 == "-n"]
+if [ "$1" == "-n" ]
 then
 cat > /tmp/mf
 a=`wc -l < /tmp/mf`
 c=$2
-let "b=a-c"
+let "b=a-c+1"
 while true
 do
 if (( b <= 0 ))
@@ -16,7 +16,8 @@ fi
 bash middle -l "${b}-${a}" "/tmp/mf"
 i=2
 let "a=b-1"
-let "b-=c*i"
+#let "b=b-c*i+c-1"
+let "b=a-c+1"
 let "i++"
 done
 else

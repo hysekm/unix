@@ -1,7 +1,7 @@
 #!/bin/sh
+cat > /tmp/mf
 if [ "$1" == "-n" ]
 then
-cat > /tmp/mf
 a=`wc -l < /tmp/mf`
 c=$2
 let "b=a-c+1"

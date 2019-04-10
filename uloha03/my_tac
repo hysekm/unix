@@ -1,0 +1,25 @@
+#!/bin/sh
+if [ $1 == "-n"]
+then
+cat > /tmp/mf
+a=`wc -l < /tmp/mf`
+c=$2
+let "b=a-c"
+while true
+do
+if (( b <= 0 ))
+then
+bash middle -l "0-${a}" "/tmp/mf"
+rm -f /tmp/mf
+exit 0
+fi
+bash middle -l "${b}-${a}" "/tmp/mf"
+i=2
+let "a=b-1"
+let "b-=c*i"
+let "i++"
+done
+else
+tac /tmp/mf
+rm -f
+fi
